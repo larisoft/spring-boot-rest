@@ -1,35 +1,33 @@
 package com.example.springbackend.Controllers;
 
 import com.example.springbackend.Models.Employee;
-import com.example.springbackend.Repository.EmployeeDAO;
+import com.example.springbackend.Repository.EmployeeRepository;
+import com.example.springbackend.serviceimpl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@RequestMapping("/employees")
 @RestController
 public class EmployeeController {
 
     @Autowired
-    EmployeeDAO empRepository;
+    EmployeeServiceImpl employeeService;
 
-    @GetMapping("/save")
-    public List<Employee> saveEmployee(){
+    @PostMapping("/save")
+    public Employee saveEmployee(@RequestBody Employee employee){
 
-        Employee newEmp = new Employee("Hilary", "Okeke", "larypetero@gmail.com");
+        return employeeService.saveEmployee(employee);
 
-        empRepository.save(newEmp);
-        List<Employee> empList = new ArrayList<Employee>();
-        Iterator iterateEmp=  empRepository.findAll().iterator();
-        while(iterateEmp.hasNext()){
+    }
 
-            empList.add((Employee) iterateEmp.next());
-        }
 
-        return empList;
+    @GetMapping("/list")
+    public List<Employee> listEmployees(){
 
+        return employeeService.getAllEmployees();
     }
 }
