@@ -9,4 +9,8 @@ public interface EmployeeService {
     Employee saveEmployee(Employee employee);
 
     List<Employee> getAllEmployees();
+
+    Employee findEmployee(long id);
+
+    void deleteEmployee(Employee empl);
 }

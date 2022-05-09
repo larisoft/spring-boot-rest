@@ -14,6 +14,7 @@ public class Employee {
     @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
     @GenericGenerator(name = "native",strategy = "native")
     @Id
+    @Column(name="Id")
     private long id;
 
     @Column(name="fist_name")
@@ -33,6 +34,10 @@ public class Employee {
        this.lastName = lname;
        this.email = email;
     }
+
+    public long getId(){return id;}
+
+    public void setId(long id ){this.id = id;}
 
     public String getLastName(){
         return lastName;
